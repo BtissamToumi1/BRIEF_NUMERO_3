@@ -4,14 +4,10 @@ public class Main {
     public static void main(String[] args) {
        Client client=new Client();
        client.Ajouter_client();
-
-
-
-       System.out.println(Client.liste_client.get(0).getAdresse());
-
-
-        System.out.println(client.getNom());
+       client.Afficher();
+       client.Modifier();
         client.Afficher();
-        client.getNom();
-}
-}
+       client.Supprimer();
+        client.Afficher();
+    }
+ }
