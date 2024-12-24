@@ -66,6 +66,64 @@ public class Client {
             System.out.println("la liste est vide");
         }
     }
+    //
+    public void Modifier(){
+        Scanner scanner= new Scanner(System.in);
+        Afficher();
+        if(!Client.liste_client.isEmpty()){
+            System.out.print("entrez l'identifiant de client que tu veux modifier > ");
+            int indice=scanner.nextInt()-1;
+            if(indice>=0 && indice<liste_client.size()) {
+                int choix = 0;
+                do {
+                    System.out.println("       Menu de Modification      ");
+                    System.out.println("       1_Modifier Nom            ");
+                    System.out.println("       2_Modifier Prenom          ");
+                    System.out.println("       3_Modifier Email           ");
+                    System.out.println("       4_Modifier Adresse         ");
+                    System.out.println("       5_Modifier Telephone       ");
+                    System.out.println("       6_Quitter                  ");
+                    System.out.print("Entrez votre choix > ");
+                    choix = scanner.nextInt();
+                    scanner.nextLine();
+                    switch (choix) {
+                        case 1:
+                            System.out.print("par quoi pouvez vous remplacez ("+liste_client.get(indice).getNom()+") : ");
+                            String nom=scanner.nextLine();
+                            Client.liste_client.get(indice).setNom(nom);
+                            break;
+                        case 2:
+                            System.out.print("par quoi pouvez vous remplacez ("+liste_client.get(indice).getPrenom()+") : ");
+                            String prenom=scanner.nextLine();
+                            liste_client.get(indice).setPrenom(prenom);
+                            break;
+                        case 3:
+                            System.out.print("par quoi pouvez vous remplacez ("+liste_client.get(indice).getEmail()+") : ");
+                            String email=scanner.next();
+                            setEmail(email);
+                            break;
+                        case 4:
+                            System.out.print("par quoi pouvez vous remplacez ("+liste_client.get(indice).getAdresse()+") : ");
+                            setAdresse(scanner.nextLine());
+                            break;
+                        case 5:
+                            System.out.print("par quoi pouvez vous remplacez ("+liste_client.get(indice).getTelephone()+") : ");
+                            String telephone=scanner.next();
+                            setTelephone(telephone);
+                            break;
+                        case 6:break;
+                    }
+                } while (choix != 6);
+            }
+            else {
+                System.out.println();
+                System.out.println("ce client n'existe pas");}
+        }
+        else{
+            System.out.println();
+            System.out.println("la liste est vide ");
+        }
+    }
     //methode Supprimer un client
     public void Supprimer(){
         Scanner scanner=new Scanner(System.in);
