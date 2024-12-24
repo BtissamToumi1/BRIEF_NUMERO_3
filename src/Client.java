@@ -66,7 +66,24 @@ public class Client {
             System.out.println("la liste est vide");
         }
     }
-    
+    //methode Supprimer un client
+    public void Supprimer(){
+        Scanner scanner=new Scanner(System.in);
+        if(!Client.liste_client.isEmpty()){
+            Afficher();
+            System.out.print("entrez l'identifiant de client que tu veux supprimer >");
+            int indice=scanner.nextInt()-1;
+            if(indice>=0 && indice<liste_client.size()){
+                Client.liste_client.remove(indice);
+            }
+            else{ System.out.println();
+                System.out.println("ce client n'existe pas ");
+            }
+        }
+        else{
+            System.out.println();
+            System.out.println("la liste est vide ");}
+    }
     public int getId() {
         return id;
     }
