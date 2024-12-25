@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 public class Client {
     private int id;
     private String nom;
@@ -27,22 +28,44 @@ public class Client {
         int idd=++compte;
         Scanner scanner=new Scanner(System.in);
         System.out.println("__________le client Numero"+compte+" :__________");
+
         System.out.print("entrez le nom de client > ");
-         String nom=scanner.nextLine();
+        String nom = scanner.nextLine();
+
+        while(!valideNom(nom)){
+            System.out.print("le nom est invalide saisir une autre fois > ");
+            nom = scanner.nextLine();
+        }
 
 
         System.out.print("entrez le prenom de client > ");
-         String prenom=scanner.nextLine();
+        String prenom=scanner.nextLine();
+
+        while(!valideNom(prenom)){
+            System.out.print("le prenom est invalide saisir une autre fois > ");
+            prenom = scanner.nextLine();
+        }
 
         System.out.print("entrez l'email de client > ");
         String email=scanner.nextLine();
 
+        while(!valideEmail(email)){
+            System.out.print("l'email est invalide saisir une autre fois > ");
+            email = scanner.nextLine();
+        }
 
         System.out.print("entrez la adresse  de client > ");
-         String adresse=scanner.nextLine();
+        String adresse=scanner.nextLine();
+
+
 
         System.out.print("entrez le telephone  de client > ");
-        String telephone=scanner.nextLine();
+        String telephone = scanner.nextLine();
+
+        while(!valideTelephone(telephone)){
+            System.out.print("l'email est invalide saisir une autre fois > ");
+            telephone = scanner.nextLine();
+        }
 
 
         Client e =new Client(idd,nom,prenom,email,adresse,telephone);
@@ -57,7 +80,7 @@ public class Client {
             System.out.println("                          >la liste des clients<                      ");
             for (int i=0;i<liste_client.size();i++){
                 System.out.println("------------------------------------------------------------------------------------");
-                System.out.println("ID : "+liste_client.get(i).getId()+"\t Nom : "+liste_client.get(i).getNom()+" \t Prenom : "+liste_client.get(i).getPrenom()+" \t email : "+liste_client.get(i).getEmail()+" \t elephone : "+liste_client.get(i).getTelephone());
+                System.out.println("ID : "+liste_client.get(i).getId()+"\t Nom : "+liste_client.get(i).getNom()+" \t Prenom : "+liste_client.get(i).getPrenom()+" \t email : "+liste_client.get(i).getEmail()+" \t telephone : "+liste_client.get(i).getTelephone()+" \t Adresse : "+liste_client.get(i).getAdresse());
             }
                 System.out.println("------------------------------------------------------------------------------------");
         }
@@ -141,6 +164,25 @@ public class Client {
         else{
             System.out.println();
             System.out.println("la liste est vide ");}
+    }
+    //
+    public boolean valideNom(String nom){
+        String regex="^[a-zA-Z]+";
+        Pattern pattern=Pattern.compile(regex);
+        Matcher matcher=pattern.matcher(nom);
+        return matcher.matches();
+    }
+    public boolean valideEmail(String email){
+        String regex="^[a-zA-Z][a-zA-Z0-9]*@gmail\\.com$";
+        Pattern pattern=Pattern.compile(regex);
+        Matcher matcher=pattern.matcher(email);
+        return matcher.matches();
+    }
+    public boolean valideTelephone(String telephone){
+        String regex="^0[5-7]\\d{8}";
+        Pattern pattern=Pattern.compile(regex);
+        Matcher matcher=pattern.matcher(telephone);
+        return matcher.matches();
     }
     public int getId() {
         return id;
