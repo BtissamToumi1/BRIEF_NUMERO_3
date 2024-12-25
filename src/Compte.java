@@ -1,13 +1,24 @@
 public abstract class Compte {
-    private String Numero;
+    private long Numero;
     private double solde;
     private Client proprietaire;
+    private int annee;
+    private int mois;
+    private int jour;
 
-    public String getNumero() {
+    public Compte(long numero, double solde, Client proprietaire, int annee, int mois, int jour) {
+        Numero = numero;
+        this.solde = solde;
+        this.proprietaire = proprietaire;
+        this.annee = annee;
+        this.mois = mois;
+        this.jour = jour;
+    }
+    public long getNumero() {
         return Numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(long numero) {
         Numero = numero;
     }
 
