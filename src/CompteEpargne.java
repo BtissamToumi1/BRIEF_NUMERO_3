@@ -10,8 +10,9 @@ public class CompteEpargne extends Compte {
         super(numero, solde, proprietaire, annee, mois, jour);
         this.tauxInteret = tauxInteret;
     }
-
-    public void AjouterCompteEpargne(){
+    public CompteEpargne(){
+    }
+    public void ChoixClient(){
         Scanner scanner=new Scanner(System.in);
         int choix;
         Client client=new Client();
@@ -23,21 +24,48 @@ public class CompteEpargne extends Compte {
             System.out.print("Entrez votre choix > ");
             choix=scanner.nextInt();
             switch (choix){
-                case 1:{ client.Ajouter_client(); break;}
+                case 1:{ client.Ajouter_client();
+                          //client=Client.liste_client.get(Client.liste_client.size());
+                          CreerCompte(client);
+                          break;
+                          }
                 case 2:{ client.Afficher();
                           if(!Client.liste_client.isEmpty()){
                               System.out.print("Entrez l'indice du client > ");
                               int indice= scanner.nextInt()-1;
                               if(indice>=0 && indice<Client.liste_client.size()){
                                   client=Client.liste_client.get(indice);
+                                  CreerCompte(client);
                               }
                               else{System.out.println("ce client n'exite pas");}
                           }else{System.out.println("la liste des clients est vide");}
+                          break;
                        }
 
                 case 3: break;
             }
         }while(choix!=3);
+    }
+    //methode pour creer un compte apres le choix (est ce client est deja existant ou bien l'ajout du nouveau client)
+    public void CreerCompte(Client client){
+
+        Scanner scanner=new Scanner(System.in);
+        int numero=++compte;
+
+        System.out.print("Entrez le solde initial > ");
+        double solde=scanner.nextDouble();
+
+        LocalDate DateActuelle=LocalDate.now();
+
+        int annee =DateActuelle.getYear();
+        int mois=DateActuelle.getMonthValue();
+        int jour=DateActuelle.getDayOfMonth();
+
+        System.out.print("Entrez le taux interet > ");
+        double tauxInteret= scanner.nextDouble();
+
+       //new CompteEpargne(numero , solde,client,annee,mois,jour);
+       liste_compteEpargne.add(new CompteEpargne(numero,solde,client,annee,mois,jour,tauxInteret));
     }
     
     public double getTauxInteret() {

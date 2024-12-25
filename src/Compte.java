@@ -5,7 +5,7 @@ public abstract class Compte {
     private int annee;
     private int mois;
     private int jour;
-
+    public Compte(){}
     public Compte(long numero, double solde, Client proprietaire, int annee, int mois, int jour) {
         Numero = numero;
         this.solde = solde;

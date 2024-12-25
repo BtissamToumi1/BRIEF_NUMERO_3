@@ -2,10 +2,13 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-       Client client=new Client();
-       client.Ajouter_client();
-      //CompteEpargne compte=new CompteEpargne();
-     // compte.AjouterCompteEpargne();
-        client.Afficher();
+        CompteEpargne compte=new CompteEpargne();
+        compte.ChoixClient();
+
+       //Client client=new Client();
+       //client.Ajouter_client();
+       //CompteEpargne compte=new CompteEpargne();
+       // compte.AjouterCompteEpargne();
+        // client.Afficher();
     }
  }
