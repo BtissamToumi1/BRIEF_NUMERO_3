@@ -100,6 +100,19 @@ public class CompteEpargne extends Compte {
         return  compte.getSolde() + ( (int) ( CalculNombreJourEcoules(compte) / 365 ) * compte.getTauxInteret());
 
     }
+    public void AfficherListeCompteEpargne(){
+        if(!liste_compteEpargne.isEmpty()){
+            System.out.println("                 >la liste des comptes Epargne<       ");
+            for(int i =0 ; i < liste_compteEpargne.size() ; i++){
+                System.out.println("************************************************************************************");
+                System.out.print("Compte : \t");
+                System.out.println("ID : "+liste_compteEpargne.get(i).getNumero()+ "\t solde : "+CalculSoldeActuel(liste_compteEpargne.get(i))+" \t tauxInteret : "+liste_compteEpargne.get(i).getTauxInteret());
+                System.out.print("Client associe : \t");
+                System.out.println( "ID : "+liste_compteEpargne.get(i).getProprietaire().getId()+"\t Nom : "+liste_compteEpargne.get(i).getProprietaire().getNom()+" \t Prenom : "+liste_compteEpargne.get(i).getProprietaire().getPrenom()+" \t email : "+liste_compteEpargne.get(i).getProprietaire().getEmail()+" \t telephone : "+liste_compteEpargne.get(i).getProprietaire().getTelephone()+" \t Adresse : "+liste_compteEpargne.get(i).getProprietaire().getAdresse());
+            }
+            System.out.println("************************************************************************************");
+        }else{System.out.println("la liste est vide");}
+    }
     public double getTauxInteret() {
         return tauxInteret;
     }

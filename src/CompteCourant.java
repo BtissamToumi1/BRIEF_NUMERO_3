@@ -104,8 +104,8 @@ public class CompteCourant extends Compte{
                 System.out.println("ID : "+liste_compteCourant.get(i).getNumero()+ "\t solde : "+CalculSoldeActuel(liste_compteCourant.get(i))+" \t fraisBancaires : "+liste_compteCourant.get(i).getFraisBnacsires());
                 System.out.print("Client associe : \t");
                 System.out.println( "ID : "+liste_compteCourant.get(i).getProprietaire().getId()+"\t Nom : "+liste_compteCourant.get(i).getProprietaire().getNom()+" \t Prenom : "+liste_compteCourant.get(i).getProprietaire().getPrenom()+" \t email : "+liste_compteCourant.get(i).getProprietaire().getEmail()+" \t telephone : "+liste_compteCourant.get(i).getProprietaire().getTelephone()+" \t Adresse : "+liste_compteCourant.get(i).getProprietaire().getAdresse());
-
             }
+            System.out.println("************************************************************************************");
         }else{System.out.println("la liste est vide");}
     }
     public double CalculSoldeActuel(CompteCourant compte){

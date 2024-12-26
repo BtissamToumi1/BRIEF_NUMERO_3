@@ -16,16 +16,38 @@ public class Operation {
             System.out.println("             2-Compte Epargne                          ");
             System.out.println("             3-pas de choix                            ");
             System.out.println("Entrez votre choix > ");
-            choix=scanner.nextInt();
-            switch (choix){
-                case 1: if(!CompteCourant.liste_compteCourant.isEmpty()){
-                           for(int i = 0; i< CompteCourant.liste_compteCourant.size() ; i++){
-                               CompteCourant.Affichercompte()
-                           }
-                        } else{System.out.println("la liste est vide ");}
+            choix = scanner.nextInt();
+            switch (choix) {
+                case 1:
+                    if (!CompteCourant.liste_compteCourant.isEmpty()) {
+                        CompteCourant comptecourant=new CompteCourant();
+                        comptecourant.AfficherListeCompteCourant();
+                        System.out.print("Entrez le numero du compte : ");
+                        //je dois ajouter ici un test sur le numero de compte
+                        //apres je vais appele la methode operation
+                        //apres je vais choisir quel type de operation
+                    } else {
+                        System.out.println("la liste est vide ");
+                    }
                     break;
+                case 2:
+                    if (!CompteEpargne.liste_compteEpargne.isEmpty()) {
+                        CompteEpargne compteEpargne=new CompteEpargne();
+                        compteEpargne.AfficherListeCompteEpargne();
+                        System.out.print("Entrez le numero du compte : ");
+                        //je dois ajouter ici un test sur le numero de compte
+                        //apres je vais appele la methode operation
+                        //apres je vais choisir quel type de operation
+                    } else {
+                        System.out.println("la liste est vide ");
+                    }
+                    break;
+                case 3:break;
             }
-        }while(choix!=3);
+            }while(choix!=3);
+        }
+
+    public void Operation(){
 
     }
     public String getType() {
