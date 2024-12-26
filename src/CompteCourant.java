@@ -1,6 +1,8 @@
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 public class CompteCourant extends Compte{
     private double fraisBnacsires;
     private static int compte=0;
@@ -81,12 +83,20 @@ public class CompteCourant extends Compte{
                 System.out.print("Compte : \t");
                 System.out.println("ID : "+liste_compteCourant.get(indice).getNumero()+ "\t solde : "+CalculSoldeActuel(liste_compteCourant.get(indice))+" \t fraisBancaires : "+liste_compteCourant.get(indice).getFraisBnacsires());
                 System.out.print("Client associe : \t");
-                System.out.println( "ID : "+liste_compteCourant.get(indice).getProprietaire().getId()+"\t Nom : "+liste_compteCourant.get(indice).getProprietaire().getNom()+" \t Prenom : "+liste_compteCourant.get(indice).getProprietaire().getPrenom()+" \t email : "+liste_compteCourant.get(indice).getProprietaire().getEmail()+" \t telephone : "+liste_compteEpargne.get(indice).getProprietaire().getTelephone()+" \t Adresse : "+liste_compteEpargne.get(indice).getProprietaire().getAdresse());
+                System.out.println( "ID : "+liste_compteCourant.get(indice).getProprietaire().getId()+"\t Nom : "+liste_compteCourant.get(indice).getProprietaire().getNom()+" \t Prenom : "+liste_compteCourant.get(indice).getProprietaire().getPrenom()+" \t email : "+liste_compteCourant.get(indice).getProprietaire().getEmail()+" \t telephone : "+liste_compteCourant.get(indice).getProprietaire().getTelephone()+" \t Adresse : "+liste_compteCourant.get(indice).getProprietaire().getAdresse());
                 System.out.println("************************************************************************************");
             }
             else{System.out.println("ce compte n'existe pas");}
         }
         else{System.out.println("la liste est vide");}
+    }
+    public long CalculNombreJourEcoules(CompteCourant compte){
+        LocalDate DateActuelle=LocalDate.now();
+        LocalDate DateCreaationCompte=LocalDate.of(compte.getAnnee(),compte.getMois(),compte.getJour());
+        return ChronoUnit.DAYS.between(DateCreaationCompte,DateActuelle);
+    }
+    public double CalculSoldeActuel(CompteCourant compte){
+        return  compte.getSolde() + ( (int) ( CalculNombreJourEcoules(compte) / 30 ) * compte.getFraisBnacsires());
     }
     public double getFraisBnacsires() {
         return fraisBnacsires;

@@ -97,7 +97,7 @@ public class CompteEpargne extends Compte {
          return ChronoUnit.DAYS.between(DateCreaationCompte,DateActuelle);
     }
     public double CalculSoldeActuel(CompteEpargne compte){
-        return  compte.getSolde() + ( (double) ( CalculNombreJourEcoules(compte) / 365 ) * compte.getTauxInteret());
+        return  compte.getSolde() + ( (int) ( CalculNombreJourEcoules(compte) / 365 ) * compte.getTauxInteret());
 
     }
     public double getTauxInteret() {
