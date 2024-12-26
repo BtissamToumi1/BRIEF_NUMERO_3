@@ -33,6 +33,61 @@ public class CompteCourant extends Compte{
         //new CompteEpargne(numero , solde,client,annee,mois,jour);
         liste_compteCourant.add(new CompteCourant(numero,solde,client,annee,mois,jour,frais));
     }
+    public void ChoixClient(){
+        Scanner scanner=new Scanner(System.in);
+        int choix;
+        Client client=new Client();
+        do{
+            System.out.println("-----------Les options possibles sont :------------");
+            System.out.println("    1-creer un compte a un nouveau client");
+            System.out.println("    2-creer un compte a un client deja existant");
+            System.out.println("    3-Quitter");
+            System.out.print("Entrez votre choix > ");
+            choix=scanner.nextInt();
+            switch (choix){
+                case 1:{ client.Ajouter_client();
+                    CreerCompte(client=Client.liste_client.get(Client.liste_client.size()-1));
+                    break;
+                }
+                case 2:{ client.Afficher();
+                    if(!Client.liste_client.isEmpty()){
+                        System.out.print("Entrez l'indice du client > ");
+                        int indice= scanner.nextInt()-1;
+                        if(indice>=0 && indice<Client.liste_client.size()){
+                            client=Client.liste_client.get(indice);
+                            CreerCompte(client);
+                        }
+                        else{System.out.println("ce client n'exite pas");}
+                    }else{System.out.println("la liste des clients est vide");}
+                    break;
+                }
+
+                case 3: break;
+            }
+        }while(choix!=3);
+    }
+    public void AfficherCompte(){
+        Scanner scanner=new Scanner(System.in);
+
+        if(!Client.liste_client.isEmpty()){
+
+            System.out.println("les numeros des comptes commence de "+1+" a "+Client.liste_client.size()+1);
+
+            System.out.println("Entrez l'indice de compte que vous souhaite afficher");
+            int indice=scanner.nextInt()-1;
+
+            if(indice>=0 && indice<Client.liste_client.size()){
+                System.out.println("************************************************************************************");
+                System.out.print("Compte : \t");
+                System.out.println("ID : "+liste_compteCourant.get(indice).getNumero()+ "\t solde : "+CalculSoldeActuel(liste_compteCourant.get(indice))+" \t fraisBancaires : "+liste_compteCourant.get(indice).getFraisBnacsires());
+                System.out.print("Client associe : \t");
+                System.out.println( "ID : "+liste_compteCourant.get(indice).getProprietaire().getId()+"\t Nom : "+liste_compteCourant.get(indice).getProprietaire().getNom()+" \t Prenom : "+liste_compteCourant.get(indice).getProprietaire().getPrenom()+" \t email : "+liste_compteCourant.get(indice).getProprietaire().getEmail()+" \t telephone : "+liste_compteEpargne.get(indice).getProprietaire().getTelephone()+" \t Adresse : "+liste_compteEpargne.get(indice).getProprietaire().getAdresse());
+                System.out.println("************************************************************************************");
+            }
+            else{System.out.println("ce compte n'existe pas");}
+        }
+        else{System.out.println("la liste est vide");}
+    }
     public double getFraisBnacsires() {
         return fraisBnacsires;
     }

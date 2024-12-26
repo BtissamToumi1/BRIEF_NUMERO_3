@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 public class CompteEpargne extends Compte {
     private double tauxInteret;
     private static int compte=0;
@@ -80,7 +81,7 @@ public class CompteEpargne extends Compte {
             if(indice>=0 && indice<Client.liste_client.size()){
                 System.out.println("************************************************************************************");
                 System.out.print("Compte : \t");
-                System.out.println("ID : "+liste_compteEpargne.get(indice).getNumero()+ "\t solde : "+liste_compteEpargne.get(indice).getSolde()+" \t tauxInteret : "+liste_compteEpargne.get(indice).getTauxInteret());
+                System.out.println("ID : "+liste_compteEpargne.get(indice).getNumero()+ "\t solde : "+CalculSoldeActuel(liste_compteEpargne.get(indice))+" \t tauxInteret : "+liste_compteEpargne.get(indice).getTauxInteret());
                 System.out.print("Client associe : \t");
                 System.out.println( "ID : "+liste_compteEpargne.get(indice).getProprietaire().getId()+"\t Nom : "+liste_compteEpargne.get(indice).getProprietaire().getNom()+" \t Prenom : "+liste_compteEpargne.get(indice).getProprietaire().getPrenom()+" \t email : "+liste_compteEpargne.get(indice).getProprietaire().getEmail()+" \t telephone : "+liste_compteEpargne.get(indice).getProprietaire().getTelephone()+" \t Adresse : "+liste_compteEpargne.get(indice).getProprietaire().getAdresse());
                 System.out.println("************************************************************************************");
@@ -88,6 +89,16 @@ public class CompteEpargne extends Compte {
             else{System.out.println("ce compte n'existe pas");}
         }
         else{System.out.println("la liste est vide");}
+    }
+    //methode pour calculer le nombre de jour ecoules entre la date de creation du compte et la date actuelle
+    public long CalculNombreJourEcoules(CompteEpargne compte){
+         LocalDate DateActuelle=LocalDate.now();
+         LocalDate DateCreaationCompte=LocalDate.of(compte.getAnnee(),compte.getMois(),compte.getJour());
+         return ChronoUnit.DAYS.between(DateCreaationCompte,DateActuelle);
+    }
+    public double CalculSoldeActuel(CompteEpargne compte){
+        return  compte.getSolde() + ( (double) ( CalculNombreJourEcoules(compte) / 365 ) * compte.getTauxInteret());
+
     }
     public double getTauxInteret() {
         return tauxInteret;
