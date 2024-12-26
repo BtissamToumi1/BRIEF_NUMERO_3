@@ -18,15 +18,14 @@ public class CompteEpargne extends Compte {
         Client client=new Client();
         do{
             System.out.println("-----------Les options possibles sont :------------");
-            System.out.println("    1-creer un compte a un client deja existant ");
-            System.out.println("    2-creer un compte a un nouveau client ");
+            System.out.println("    1-creer un compte a un nouveau client");
+            System.out.println("    2-creer un compte a un client deja existant");
             System.out.println("    3-Quitter");
             System.out.print("Entrez votre choix > ");
             choix=scanner.nextInt();
             switch (choix){
                 case 1:{ client.Ajouter_client();
-                          //client=Client.liste_client.get(Client.liste_client.size());
-                          CreerCompte(client);
+                          CreerCompte(client=Client.liste_client.get(Client.liste_client.size()-1));
                           break;
                           }
                 case 2:{ client.Afficher();
@@ -67,7 +66,29 @@ public class CompteEpargne extends Compte {
        //new CompteEpargne(numero , solde,client,annee,mois,jour);
        liste_compteEpargne.add(new CompteEpargne(numero,solde,client,annee,mois,jour,tauxInteret));
     }
-    
+    //methode pour afficher les informations d'un compte bancaire
+    public void AfficherCompte(){
+        Scanner scanner=new Scanner(System.in);
+
+        if(!Client.liste_client.isEmpty()){
+
+            System.out.println("les numeros des comptes commence de "+1+" a "+Client.liste_client.size()+1);
+
+            System.out.println("Entrez l'indice de compte que vous souhaite afficher");
+            int indice=scanner.nextInt()-1;
+
+            if(indice>=0 && indice<Client.liste_client.size()){
+                System.out.println("************************************************************************************");
+                System.out.print("Compte : \t");
+                System.out.println("ID : "+liste_compteEpargne.get(indice).getNumero()+ "\t solde : "+liste_compteEpargne.get(indice).getSolde()+" \t tauxInteret : "+liste_compteEpargne.get(indice).getTauxInteret());
+                System.out.print("Client associe : \t");
+                System.out.println( "ID : "+liste_compteEpargne.get(indice).getProprietaire().getId()+"\t Nom : "+liste_compteEpargne.get(indice).getProprietaire().getNom()+" \t Prenom : "+liste_compteEpargne.get(indice).getProprietaire().getPrenom()+" \t email : "+liste_compteEpargne.get(indice).getProprietaire().getEmail()+" \t telephone : "+liste_compteEpargne.get(indice).getProprietaire().getTelephone()+" \t Adresse : "+liste_compteEpargne.get(indice).getProprietaire().getAdresse());
+                System.out.println("************************************************************************************");
+            }
+            else{System.out.println("ce compte n'existe pas");}
+        }
+        else{System.out.println("la liste est vide");}
+    }
     public double getTauxInteret() {
         return tauxInteret;
     }

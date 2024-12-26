@@ -3,12 +3,12 @@
 public class Main {
     public static void main(String[] args) {
         CompteEpargne compte=new CompteEpargne();
+        Client client=new Client();
+        //client.Ajouter_client();
         compte.ChoixClient();
-
-       //Client client=new Client();
-       //client.Ajouter_client();
-       //CompteEpargne compte=new CompteEpargne();
-       // compte.AjouterCompteEpargne();
-        // client.Afficher();
+        client.Afficher();
+        compte.AfficherCompte();
+        //client.Ajouter_client();
+        //client.Afficher();
     }
  }
