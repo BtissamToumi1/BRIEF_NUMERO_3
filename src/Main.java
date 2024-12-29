@@ -9,7 +9,13 @@ public class Main {
        CompteCourant comptecourant=new CompteCourant();
        CompteEpargne compteepargne=new CompteEpargne();
        Client client=new Client();
-       int choix=0,choix1=0,choix2=0,choix3=0;
+       Operation operation=new Operation();
+       comptecourant.ChoixClient();
+       compteepargne.ChoixClient();
+       operation.MenuChoixTypeCompte();
+       comptecourant.AfficherListeCompteCourant();
+       compteepargne.AfficherListeCompteEpargne();
+       /*int choix=0,choix1=0,choix2=0,choix3=0;
        do{
           System.out.println("----------Menu Gestion Bancaire--------------");
           System.out.println("          1-Gestion Client                   ");
@@ -75,12 +81,12 @@ public class Main {
 
              case 3:do{
                 System.out.println("----------Menu Gestion Operation--------------");
-                System.out.println("          1-Effectuer un Depot sur un Compte Epargne            ");
-                System.out.println("          2-Effectuer un Depot sur un Compte Courant            ");
-                System.out.println("          3-Effectuer un Retrait sur un Compte Epargne      ");
-                System.out.println("          4-Effectuer un Retrait sur un Compte Courant      ");
+                System.out.println("          1-Effectuer un Depot sur un Compte Epargne       ");
+                System.out.println("          2-Effectuer un Depot sur un Compte Courant       ");
+                System.out.println("          3-Effectuer un Retrait sur un Compte Epargne     ");
+                System.out.println("          4-Effectuer un Retrait sur un Compte Courant     ");
                 System.out.println("          5-Effectuer un virement sur un Compte Epargne    ");
-                System.out.println("          6-Effectuer un virement sur un Comte Epargne    ");
+                System.out.println("          6-Effectuer un virement sur un Comte Epargne     ");
                 System.out.println("          7-Menu Gestion Bancaire");
                 try{
                    System.out.println("Entrez votre choix > ");
@@ -108,6 +114,6 @@ public class Main {
                 System.out.println(" Entrez invalide ");
                 scan.next();
              }
-       }while(choix!=4);
+       }while(choix!=4);*/
     }
  }

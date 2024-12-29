@@ -135,7 +135,7 @@ public class Operation {
                     compteEpargne.AfficherListeCompteEpargne();
 
                     System.out.print("Entrez le numero du compte : ");
-                    int indiceEpargne=scanner.nextInt();
+                    int indiceEpargne=scanner.nextInt()-1;
 
                     if(ValideIndiceEpargne(indiceEpargne)){
 
@@ -162,7 +162,7 @@ public class Operation {
                     compteCourant.AfficherListeCompteCourant();
 
                     System.out.print("Entrez le numero du compte : ");
-                    int indiceCourant=scanner.nextInt();
+                    int indiceCourant=scanner.nextInt()-1;
 
                     if(ValideIndiceCourant(indiceCourant)){
 
@@ -174,8 +174,13 @@ public class Operation {
 
                         ListeOpertion.add(new Operation(type3, montant, date3 ,CompteAssocie3));
 
-                        CompteEpargne.liste_compteEpargne.get(indiceCourant).setSolde(CompteEpargne.liste_compteEpargne.get(indiceCourant).CalculNombreJourEcoules(CompteEpargne.liste_compteEpargne.get(indiceCourant))+montantVerser);
-                        CompteEpargne.liste_compteEpargne.get(indice).setSolde(CompteEpargne.liste_compteEpargne.get(indice).CalculNombreJourEcoules(CompteEpargne.liste_compteEpargne.get(indice))-montantVerser);
+                        double nouveauSoldeCourant=CompteCourant.liste_compteCourant.get(indiceCourant).CalculSoldeActuel(CompteCourant.liste_compteCourant.get(indiceCourant));
+
+                        CompteCourant.liste_compteCourant.get(indiceCourant).setSolde(nouveauSoldeCourant+montantVerser);
+
+                        double nouveauSoldeEpargne=CompteEpargne.liste_compteEpargne.get(indice).CalculSoldeActuel(CompteEpargne.liste_compteEpargne.get(indice));
+
+                        CompteEpargne.liste_compteEpargne.get(indice).setSolde(nouveauSoldeEpargne-montantVerser);
 
                     }else{System.out.println("ce compte n'existe pas");}
 
@@ -185,7 +190,19 @@ public class Operation {
             }
         }else{System.out.println("cette operation est impossible");}
     }
+    //la partie operation pour le compte courant
+    public void operationDepotCourant(double montantDepot,int indice) {
+        CompteCourant.liste_compteCourant.get(indice).setSolde(CompteCourant.liste_compteCourant.get(indice).CalculSoldeActuel(CompteCourant.liste_compteCourant.get(indice)) + montantDepot);
 
+        LocalDate date1= LocalDate.now();
+
+        String CompteAssocie1="N : " +CompteCourant.liste_compteCourant.get(indice).getNumero()+" Compte Courant";
+
+        String type1="Depot";
+
+        ListeOpertion.add(new Operation(type1, montant, date1 ,CompteAssocie1));
+    }
+    //
     public boolean ValideIndiceEpargne(int indice){
         if( indice >= 0 && indice < CompteEpargne.liste_compteEpargne.size()){
             return true;
