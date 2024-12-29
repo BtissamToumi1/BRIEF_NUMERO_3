@@ -15,7 +15,7 @@ public class Main {
        operation.MenuChoixTypeCompte();
        comptecourant.AfficherListeCompteCourant();
        compteepargne.AfficherListeCompteEpargne();
-       /*int choix=0,choix1=0,choix2=0,choix3=0;
+       int choix=0,choix1=0,choix2=0,choix3=0;
        do{
           System.out.println("----------Menu Gestion Bancaire--------------");
           System.out.println("          1-Gestion Client                   ");
@@ -82,22 +82,22 @@ public class Main {
              case 3:do{
                 System.out.println("----------Menu Gestion Operation--------------");
                 System.out.println("          1-Effectuer un Depot sur un Compte Epargne       ");
-                System.out.println("          2-Effectuer un Depot sur un Compte Courant       ");
+               /& System.out.println("          2-Effectuer un Depot sur un Compte Courant       ");
                 System.out.println("          3-Effectuer un Retrait sur un Compte Epargne     ");
                 System.out.println("          4-Effectuer un Retrait sur un Compte Courant     ");
                 System.out.println("          5-Effectuer un virement sur un Compte Epargne    ");
-                System.out.println("          6-Effectuer un virement sur un Comte Epargne     ");
-                System.out.println("          7-Menu Gestion Bancaire");
+                System.out.println("          6-Effectuer un virement sur un Comte Epargne     ");*/
+                System.out.println("          2-Menu Gestion Bancaire");
                 try{
                    System.out.println("Entrez votre choix > ");
                    choix3= scan.nextInt();
                    switch (choix2){
-                      case 1: break;
-                      case 2: break;
+                      case 1:operation.MenuChoixTypeCompte(); break;
+                      /*case 2: break;
                       case 3: break;
                       case 4: break;
                       case 5: break;
-                      case 6: break;
+                      case 6: break;*/
                       default:System.out.println("Au revoir "); break;
                    }
                 }
@@ -114,6 +114,6 @@ public class Main {
                 System.out.println(" Entrez invalide ");
                 scan.next();
              }
-       }while(choix!=4);*/
+       }while(choix!=4);
     }
  }
