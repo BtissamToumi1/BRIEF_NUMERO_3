@@ -5,10 +5,9 @@ public abstract class Compte {
     private int annee;
     private int mois;
     private int jour;
-    private static int compte=0;
     public Compte(){}
-    public Compte(double solde, Client proprietaire, int annee, int mois, int jour) {
-        Numero = ++compte;
+    public Compte(long numero,double solde, Client proprietaire, int annee, int mois, int jour) {
+        Numero=numero;
         this.solde = solde;
         this.proprietaire = proprietaire;
         this.annee = annee;
@@ -16,13 +15,6 @@ public abstract class Compte {
         this.jour = jour;
     }
 
-    public static int getCompte() {
-        return compte;
-    }
-
-    public static void setCompte(int compte) {
-        Compte.compte = compte;
-    }
 
     public int getAnnee() {
         return annee;

@@ -4,11 +4,12 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 public class CompteCourant extends Compte{
+    private static int compte=0;
     private double fraisBnacsires;
     public static ArrayList<CompteCourant> liste_compteCourant=new ArrayList<>();
 
-    public CompteCourant( double solde, Client proprietaire, int annee, int mois, int jour, double fraisBnacsires) {
-        super(solde, proprietaire, annee, mois, jour);
+    public CompteCourant(long id, double solde, Client proprietaire, int annee, int mois, int jour, double fraisBnacsires) {
+        super(id,solde, proprietaire, annee, mois, jour);
         this.fraisBnacsires = fraisBnacsires;
     }
      public CompteCourant(){
@@ -18,6 +19,7 @@ public class CompteCourant extends Compte{
 
         Scanner scanner=new Scanner(System.in);
 
+        int id=++compte;
 
         System.out.print("Entrez le solde initial > ");
         double solde=scanner.nextDouble();
@@ -31,8 +33,7 @@ public class CompteCourant extends Compte{
         System.out.print("Entrez les fraisBancaires > ");
         double frais= scanner.nextDouble();
 
-        //new CompteEpargne(numero , solde,client,annee,mois,jour);
-        liste_compteCourant.add(new CompteCourant(solde,client,annee,mois,jour,frais));
+        liste_compteCourant.add(new CompteCourant(id,solde,client,annee,mois,jour,frais));
     }
     public void ChoixClient(){
         Scanner scanner=new Scanner(System.in);

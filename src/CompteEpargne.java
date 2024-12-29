@@ -4,10 +4,11 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 public class CompteEpargne extends Compte {
     private double tauxInteret;
+    private static int compte=0;
     public static ArrayList<CompteEpargne> liste_compteEpargne=new ArrayList<>();
 
-    public CompteEpargne( double solde, Client proprietaire, int annee, int mois, int jour, double tauxInteret) {
-        super( solde, proprietaire, annee, mois, jour);
+    public CompteEpargne(long id, double solde, Client proprietaire, int annee, int mois, int jour, double tauxInteret) {
+        super(id,solde, proprietaire, annee, mois, jour);
         this.tauxInteret = tauxInteret;
     }
     public CompteEpargne(){
@@ -50,6 +51,7 @@ public class CompteEpargne extends Compte {
 
         Scanner scanner=new Scanner(System.in);
 
+        long id=++compte;
 
         System.out.print("Entrez le solde initial > ");
         double solde=scanner.nextDouble();
@@ -64,7 +66,7 @@ public class CompteEpargne extends Compte {
         double tauxInteret= scanner.nextDouble();
 
        //new CompteEpargne(numero , solde,client,annee,mois,jour);
-       liste_compteEpargne.add(new CompteEpargne(solde,client,annee,mois,jour,tauxInteret));
+       liste_compteEpargne.add(new CompteEpargne(id,solde,client,annee,mois,jour,tauxInteret));
     }
     //methode pour afficher les informations d'un compte bancaire
     public void AfficherCompte(){

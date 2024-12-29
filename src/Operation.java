@@ -17,7 +17,9 @@ public class Operation {
         this.CompteAssocie = CompteAssocie;
         ListeOpertion = new ArrayList<>();
     }
+    public Operation(){
 
+    }
     public void MenuChoixTypeCompte(){
         Scanner scanner=new Scanner(System.in);
         int choix=0;
@@ -34,9 +36,10 @@ public class Operation {
                         CompteCourant comptecourant=new CompteCourant();
                         comptecourant.AfficherListeCompteCourant();
                         System.out.print("Entrez le numero du compte : ");
-                        //je dois ajouter ici un test sur le numero de compte
-                        //apres je vais appele la methode operation
-                        //apres je vais choisir quel type de operation
+                        int indiceCourant=scanner.nextInt()-1;
+                        if( ValideIndiceCourant(indiceCourant) ){
+                            //menuChoixOperationEpargne(indiceCourant);
+                        }else{System.out.println("ce compte n'existe pas");}
                     } else {
                         System.out.println("la liste est vide ");
                     }
@@ -46,9 +49,10 @@ public class Operation {
                         CompteEpargne compteEpargne=new CompteEpargne();
                         compteEpargne.AfficherListeCompteEpargne();
                         System.out.print("Entrez le numero du compte : ");
-                        //je dois ajouter ici un test sur le numero de compte
-                        //apres je vais appele la methode operation
-                        //apres je vais choisir quel type de operation
+                        int indiceEpargne=scanner.nextInt()-1;
+                        if(ValideIndiceEpargne(indiceEpargne)){
+                            menuChoixOperationEpargne(indiceEpargne);
+                        }else{System.out.println("ce compte n'existe pas");}
                     } else {
                         System.out.println("la liste est vide ");
                     }
@@ -57,7 +61,7 @@ public class Operation {
             }
             }while(choix!=3);
         }
-    public void OperationEpargne(int indice){
+    public void menuChoixOperationEpargne(int indice){
           Scanner  scanner=new Scanner(System.in);
           int choix=0;
           do{
@@ -70,43 +74,129 @@ public class Operation {
               choix=scanner.nextInt();
               switch (choix){
                   case 1: System.out.println("Veuillez entrer le montant que vous souhaitez déposer > ");
-                          double montantD=scanner.nextDouble();
-                          //pour modifier le solde initial apres
-                          CompteEpargne.liste_compteEpargne.get(indice).setSolde(CompteEpargne.liste_compteEpargne.get(indice).getSolde() + montant);
-
-                          LocalDate date1= LocalDate.now();
-
-                          String CompteAssocie1="N : " +CompteEpargne.liste_compteEpargne.get(indice).getNumero()+" Compte Epargne";
-
-                          String type1="Depot";
-
-                          ListeOpertion.add(new Operation(type1, montant, date1 ,CompteAssocie1));
-
-                         break;
+                          double montantDepot=scanner.nextDouble();
+                          operationDepotEpargne(montantDepot,indice);
+                          break;
 
                   case 2: System.out.println("Veuillez entrer le montant que vous souhaitez retirer > ");
-                          double montantR=scanner.nextDouble();
-
-                          if(CompteEpargne.liste_compteEpargne.get(indice).getSolde()>=montantR){
-
-                              CompteEpargne.liste_compteEpargne.get(indice).setSolde(CompteEpargne.liste_compteEpargne.get(indice).getSolde() - montant);
-
-                              LocalDate date2= LocalDate.now();
-
-                              String CompteAssocie2="N : " +CompteEpargne.liste_compteEpargne.get(indice).getNumero()+" Compte Epargne";
-
-                              String type2="Retrait";
-
-                              ListeOpertion.add(new Operation(type2, montant, date2 ,CompteAssocie2));
-                          }
-                          else{System.out.println("Impossible de faire cette operation");}
-
+                          double montantRetrait=scanner.nextDouble();
+                          operationRetirerEpargne(montantRetrait,indice);
                           break;
-                  case 3: System.out.println("Veuillez entrer le montant que vous souhaitez virser > ");
-                          double montantV=scanner.nextDouble();
-                  case 4:break;
+                  case 3: System.out.println("Veuillez entrer le montant que vous souhaitez verser > ");
+                          double montantVerser=scanner.nextDouble();
+                          operationVerser( montantVerser,indice);
+                  case 4 : break;
               }
           }while(choix!=4);
+    }
+    public void operationDepotEpargne(double montantDepot,int indice) {
+        CompteEpargne.liste_compteEpargne.get(indice).setSolde(CompteEpargne.liste_compteEpargne.get(indice).CalculSoldeActuel(CompteEpargne.liste_compteEpargne.get(indice)) + montantDepot);
+
+        LocalDate date1= LocalDate.now();
+
+        String CompteAssocie1="N : " +CompteEpargne.liste_compteEpargne.get(indice).getNumero()+" Compte Epargne";
+
+        String type1="Depot";
+
+        ListeOpertion.add(new Operation(type1, montant, date1 ,CompteAssocie1));
+    }
+    public void operationRetirerEpargne(double montantRetrait,int indice) {
+
+
+        if(CompteEpargne.liste_compteEpargne.get(indice).CalculSoldeActuel(CompteEpargne.liste_compteEpargne.get(indice))>=montantRetrait){
+
+            CompteEpargne.liste_compteEpargne.get(indice).setSolde(CompteEpargne.liste_compteEpargne.get(indice).CalculSoldeActuel(CompteEpargne.liste_compteEpargne.get(indice)) - montantRetrait);
+
+            LocalDate date2= LocalDate.now();
+
+            String CompteAssocie2="N : " +CompteEpargne.liste_compteEpargne.get(indice).getNumero()+" Compte Epargne";
+
+            String type2="Retrait";
+
+            ListeOpertion.add(new Operation(type2, montant, date2 ,CompteAssocie2));
+        }
+        else{System.out.println("Impossible de faire cette operation");}
+    }
+    public void operationVerser(double montantVerser,int indice){
+        Scanner  scanner=new Scanner(System.in);
+        if(CompteEpargne.liste_compteEpargne.get(indice).CalculSoldeActuel(CompteEpargne.liste_compteEpargne.get(indice))>=montantVerser){
+
+            System.out.println("_______Menu de choix de type de compte_______");
+            System.out.println("      1_Verser le montant sur un compte épargne");
+            System.out.println("      2_Verser le montant sur un compte courant");
+            System.out.println("________________________________________________");
+            System.out.println("Entrez votre choix > ");
+            int choix1= scanner.nextInt();
+            switch (choix1){
+                case 1:if(!CompteEpargne.liste_compteEpargne.isEmpty()){
+
+                    CompteEpargne compteEpargne=new CompteEpargne();
+
+                    compteEpargne.AfficherListeCompteEpargne();
+
+                    System.out.print("Entrez le numero du compte : ");
+                    int indiceEpargne=scanner.nextInt();
+
+                    if(ValideIndiceEpargne(indiceEpargne)){
+
+                        LocalDate date3= LocalDate.now();
+
+                        String CompteAssocie3="N : " +CompteEpargne.liste_compteEpargne.get(indice).getNumero()+" Compte Epargne";
+
+                        String type3="virement";
+
+                        ListeOpertion.add(new Operation(type3, montant, date3 ,CompteAssocie3));
+
+                        CompteEpargne.liste_compteEpargne.get(indiceEpargne).setSolde(CompteEpargne.liste_compteEpargne.get(indiceEpargne).CalculNombreJourEcoules(CompteEpargne.liste_compteEpargne.get(indiceEpargne))+montantVerser);
+                        CompteEpargne.liste_compteEpargne.get(indice).setSolde(CompteEpargne.liste_compteEpargne.get(indice).CalculNombreJourEcoules(CompteEpargne.liste_compteEpargne.get(indice))-montantVerser);
+
+                    }else{System.out.println("ce compte n'existe pas");}
+
+                }else{System.out.println("la liste est vide ");}
+                    break;
+
+                case 2:if(!CompteCourant.liste_compteCourant.isEmpty()){
+
+                    CompteCourant compteCourant=new CompteCourant();
+
+                    compteCourant.AfficherListeCompteCourant();
+
+                    System.out.print("Entrez le numero du compte : ");
+                    int indiceCourant=scanner.nextInt();
+
+                    if(ValideIndiceCourant(indiceCourant)){
+
+                        LocalDate date3= LocalDate.now();
+
+                        String CompteAssocie3="N : " +CompteEpargne.liste_compteEpargne.get(indice).getNumero()+" Compte Epargne";
+
+                        String type3="virement";
+
+                        ListeOpertion.add(new Operation(type3, montant, date3 ,CompteAssocie3));
+
+                        CompteEpargne.liste_compteEpargne.get(indiceCourant).setSolde(CompteEpargne.liste_compteEpargne.get(indiceCourant).CalculNombreJourEcoules(CompteEpargne.liste_compteEpargne.get(indiceCourant))+montantVerser);
+                        CompteEpargne.liste_compteEpargne.get(indice).setSolde(CompteEpargne.liste_compteEpargne.get(indice).CalculNombreJourEcoules(CompteEpargne.liste_compteEpargne.get(indice))-montantVerser);
+
+                    }else{System.out.println("ce compte n'existe pas");}
+
+                }else{System.out.println("la liste est vide ");}
+
+                    break;
+            }
+        }else{System.out.println("cette operation est impossible");}
+    }
+
+    public boolean ValideIndiceEpargne(int indice){
+        if( indice >= 0 && indice < CompteEpargne.liste_compteEpargne.size()){
+            return true;
+        }
+        return false;
+    }
+    public boolean ValideIndiceCourant(int indice){
+        if( indice >=0 && indice < CompteCourant.liste_compteCourant.size() ){
+            return true;
+        }
+        return false;
     }
     public String getType() {
         return type;
