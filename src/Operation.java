@@ -202,7 +202,23 @@ public class Operation {
 
         ListeOpertion.add(new Operation(type1, montant, date1 ,CompteAssocie1));
     }
-    //
+    public void operationRetirerCourant(double montantRetrait,int indice) {
+
+
+        if(CompteCourant.liste_compteCourant.get(indice).CalculSoldeActuel(CompteCourant.liste_compteCourant.get(indice))>=montantRetrait){
+
+            CompteCourant.liste_compteCourant.get(indice).setSolde(CompteCourant.liste_compteCourant.get(indice).CalculSoldeActuel(CompteCourant.liste_compteCourant.get(indice)) - montantRetrait);
+
+            LocalDate date2= LocalDate.now();
+
+            String CompteAssocie2="N : " +CompteCourant.liste_compteCourant.get(indice).getNumero()+" Compte Courant";
+
+            String type2="Retrait";
+
+            ListeOpertion.add(new Operation(type2, montant, date2 ,CompteAssocie2));
+        }
+        else{System.out.println("Impossible de faire cette operation");}
+    }
     public boolean ValideIndiceEpargne(int indice){
         if( indice >= 0 && indice < CompteEpargne.liste_compteEpargne.size()){
             return true;
