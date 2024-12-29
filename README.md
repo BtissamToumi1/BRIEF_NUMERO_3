@@ -58,3 +58,6 @@ Diagramme de cas d'utilsation
 
 <img width="707" alt="Diagramme de cas d'utilasation Gestion bancaire" src="https://github.com/user-attachments/assets/b86007dc-db29-468b-9527-c46b68f50fb1" />
 
+Diagramme de sequence
+
+<img width="431" alt="dIagramme de sequence" src="https://github.com/user-attachments/assets/9ef9ed96-18f4-4d46-903e-282941ef49a7" />
