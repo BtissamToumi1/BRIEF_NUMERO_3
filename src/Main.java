@@ -10,11 +10,11 @@ public class Main {
        CompteEpargne compteepargne=new CompteEpargne();
        Client client=new Client();
        Operation operation=new Operation();
-       comptecourant.ChoixClient();
+       /*comptecourant.ChoixClient();
        compteepargne.ChoixClient();
        operation.MenuChoixTypeCompte();
        comptecourant.AfficherListeCompteCourant();
-       compteepargne.AfficherListeCompteEpargne();
+       compteepargne.AfficherListeCompteEpargne();*/
        int choix=0,choix1=0,choix2=0,choix3=0;
        do{
           System.out.println("----------Menu Gestion Bancaire--------------");
@@ -23,7 +23,7 @@ public class Main {
           System.out.println("          3-Gestion operation                ");
           System.out.println("          4-Quitter                          ");
           try{
-             System.out.println("Entrez votre choix > ");
+             System.out.print("Entrez votre choix > ");
              choix= scan.nextInt();
              switch (choix){
              case 1:do{
@@ -34,7 +34,7 @@ public class Main {
                 System.out.println("          4-Supprimer client                ");
                 System.out.println("          5-Menu Gestion Bancaire   ");
                 try{
-                   System.out.println("Entrez votre choix > ");
+                   System.out.print("Entrez votre choix > ");
                    choix1= scan.nextInt();
                    switch (choix1){
                       case 1:client.Ajouter_client();break;
@@ -45,7 +45,7 @@ public class Main {
                    }
                 }
                 catch (InputMismatchException e) {
-                   System.out.println(" Entrez invalide ");
+                   System.out.print(" Entrez invalide ");
                    scan.next();
                 }
              }while(choix1!=5);
@@ -60,7 +60,7 @@ public class Main {
                 System.out.println("          6-Afficher liste Comte Epargne    ");
                 System.out.println("          7-Menu Gestion Bancaire");
                 try{
-                   System.out.println("Entrez votre choix > ");
+                   System.out.print("Entrez votre choix > ");
                    choix2= scan.nextInt();
                    switch (choix2){
                       case 1:compteepargne.ChoixClient(); break;
@@ -73,7 +73,7 @@ public class Main {
                    }
                 }
                 catch (InputMismatchException e) {
-                   System.out.println(" Entrez invalide ");
+                   System.out.print(" Entrez invalide > ");
                    scan.next();
                 }
              }while(choix2!=7);
@@ -81,17 +81,17 @@ public class Main {
 
              case 3:do{
                 System.out.println("----------Menu Gestion Operation--------------");
-                System.out.println("          1-Effectuer un Depot sur un Compte Epargne       ");
-               /& System.out.println("          2-Effectuer un Depot sur un Compte Courant       ");
+                System.out.println("          1-Effectuer des Operations      ");
+               /*System.out.println("          2-Effectuer un Depot sur un Compte Courant       ");
                 System.out.println("          3-Effectuer un Retrait sur un Compte Epargne     ");
                 System.out.println("          4-Effectuer un Retrait sur un Compte Courant     ");
                 System.out.println("          5-Effectuer un virement sur un Compte Epargne    ");
                 System.out.println("          6-Effectuer un virement sur un Comte Epargne     ");*/
                 System.out.println("          2-Menu Gestion Bancaire");
                 try{
-                   System.out.println("Entrez votre choix > ");
+                   System.out.print("Entrez votre choix > ");
                    choix3= scan.nextInt();
-                   switch (choix2){
+                   switch (choix3){
                       case 1:operation.MenuChoixTypeCompte(); break;
                       /*case 2: break;
                       case 3: break;
@@ -102,16 +102,16 @@ public class Main {
                    }
                 }
                 catch (InputMismatchException e) {
-                   System.out.println(" Entrez invalide ");
+                   System.out.print(" Entrez invalide > ");
                    scan.next();
                 }
-             }while(choix3!=7);
+             }while(choix3!=2);
                 break;
                 default: System.out.println("Au revoir");break;
              }
           }
           catch (InputMismatchException e) {
-                System.out.println(" Entrez invalide ");
+                System.out.print(" Entrez invalide > ");
                 scan.next();
              }
        }while(choix!=4);

@@ -362,7 +362,7 @@ public class Operation {
 
                                 double nouveauSoldeCourant1 = CompteCourant.liste_compteCourant.get(indice).CalculSoldeActuel(CompteCourant.liste_compteCourant.get(indice));
 
-                                CompteEpargne.liste_compteEpargne.get(indice).setSolde(nouveauSoldeCourant1 - montantVerser);
+                                CompteCourant.liste_compteCourant.get(indice).setSolde(nouveauSoldeCourant1 - montantVerser);
 
                             } else {
                                 System.out.println("ce compte n'existe pas");
