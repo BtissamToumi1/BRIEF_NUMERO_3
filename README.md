@@ -50,4 +50,6 @@ Perform a deposit into an account.
 Perform a withdrawal with balance verification.
 
 Perform transfers between two accounts.
+Diagramme de classe
+<img width="665" alt="diagramme_de_classe_b3" src="https://github.com/user-attachments/assets/c0cff0ce-b089-41d6-8ac8-dc96f46bbc6f" />
 
